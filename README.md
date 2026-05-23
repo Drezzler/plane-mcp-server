@@ -119,6 +119,12 @@ The server requires authentication via environment variables:
 - `PLANE_API_KEY`: API key for authentication (required for stdio transport)
 - `PLANE_WORKSPACE_SLUG`: Workspace slug identifier (required for stdio transport)
 - `PLANE_ACCESS_TOKEN`: Access token for authentication (alternative to API key)
+- `PLANE_EMAIL`: Plane account email for automatic session login to page APIs - Optional
+- `PLANE_PASSWORD`: Plane account password for automatic session login to page APIs - Optional
+
+For self-hosted Plane instances, set `PLANE_BASE_URL` to your Plane API host URL. The Python-based MCP server does not read the older Node.js `PLANE_API_HOST_URL` environment variable.
+
+Plane page APIs use Plane's session-authenticated `/api/` routes. To manage pages, either call `plane_login`, call `plane_import_cookies`, or set `PLANE_EMAIL` and `PLANE_PASSWORD` so the server can automatically create a session.
 
 **Example** (for stdio transport):
 ```bash
@@ -323,10 +329,37 @@ The server provides comprehensive tools for interacting with Plane. All tools us
 
 | Tool Name | Description |
 |-----------|-------------|
+| `list_pages` | List all pages in a project |
+| `get_page` | Get details of a project page |
 | `retrieve_workspace_page` | Retrieve a workspace page by ID |
 | `retrieve_project_page` | Retrieve a project page by ID |
+| `create_page` | Create a project page |
 | `create_workspace_page` | Create a workspace page |
 | `create_project_page` | Create a project page |
+| `update_page` | Update a project page |
+| `delete_page` | Delete a project page |
+| `archive_page` | Archive a project page |
+| `unarchive_page` | Unarchive a project page |
+| `lock_page` | Lock a project page |
+| `unlock_page` | Unlock a project page |
+| `favorite_page` | Mark a project page as favorite |
+| `unfavorite_page` | Remove a project page from favorites |
+| `duplicate_page` | Duplicate a project page |
+| `set_page_access` | Set project page access level |
+| `get_pages_summary` | Get a project page summary |
+| `get_page_description` | Get project page description content |
+| `update_page_description` | Update project page description content |
+| `get_page_versions` | Get project page version history |
+| `get_page_version` | Get a specific project page version |
+
+### Auth
+
+| Tool Name | Description |
+|-----------|-------------|
+| `plane_login` | Authenticate with Plane using email/password for session-backed page APIs |
+| `plane_import_cookies` | Import browser cookies for session-backed page APIs |
+| `plane_auth_status` | Check current Plane authentication status |
+| `plane_logout` | Clear session cookies from the MCP server process |
 
 ### Workspaces
 
@@ -405,4 +438,6 @@ If you were using the previous Node.js-based `@makeplane/plane-mcp-server`, your
 ```
 
 **Please migrate to the new Python-based configuration shown in the Usage section above.**
+
+When migrating self-hosted configurations, replace `PLANE_API_HOST_URL` with `PLANE_BASE_URL`.
 

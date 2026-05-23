@@ -775,7 +775,7 @@ wheels = [
 
 [[package]]
 name = "plane-mcp-server"
-version = "0.2.10"
+version = "0.2.9"
 source = { editable = "." }
 dependencies = [
     { name = "authlib" },
@@ -784,6 +784,7 @@ dependencies = [
     { name = "plane-sdk" },
     { name = "py-key-value-aio", extra = ["redis"] },
     { name = "pyjwt" },
+    { name = "requests" },
 ]
 
 [package.optional-dependencies]
@@ -801,6 +802,7 @@ requires-dist = [
     { name = "py-key-value-aio", extras = ["redis"], specifier = ">=0.4.4,<0.5.0" },
     { name = "pyjwt", specifier = ">=2.12.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
+    { name = "requests", specifier = ">=2.32.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.1.0" },
 ]
 provides-extras = ["dev"]
